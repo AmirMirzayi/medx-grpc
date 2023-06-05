@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	pb "medx/grpc/proto/login"
+	pb "medx/grpc/pb"
 )
 
 func (*server) DoLogin(context.Context, *pb.LoginRequest) (*pb.LoginResponse, error) {

@@ -3,7 +3,7 @@ package client
 import (
 	"context"
 	"fmt"
-	pb "medx/grpc/proto/login"
+	pb "medx/grpc/pb"
 
 	"google.golang.org/grpc"
 )

@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option go_package = "medx/grpc/pb";
+
+message Auth {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginRequest {
+  Auth auth = 1;
+}
+
+message LoginResponse {
+  string token = 1;
+}
+
+service LoginService {
+  rpc DoLogin(LoginRequest) returns(LoginResponse) {}
+}

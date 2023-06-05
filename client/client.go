@@ -1,19 +1,19 @@
-package main
+package client
 
 import (
 	"context"
-	"log"
-	pb "medx/grpc/pb/proto"
+	"fmt"
+	pb "medx/grpc/proto/login"
 
 	"google.golang.org/grpc"
 )
 
-func main() {
+func CallGrpcServer() (string, error) {
 	var conn *grpc.ClientConn
 	conn, err := grpc.Dial(":9000", grpc.WithInsecure())
 
 	if err != nil {
-		log.Fatalf("did not connect: %v", err)
+		return "", fmt.Errorf("did not connect to server: %v", err)
 	}
 	defer conn.Close()
 
@@ -26,9 +26,8 @@ func main() {
 	})
 
 	if err != nil {
-		log.Fatalf("unable to fetch data from grpc server: %v", err)
+		return "", fmt.Errorf("unable to fetch data from grpc server: %v", err)
 	}
 
-	log.Printf("token is: %v", resp.Token)
-
+	return resp.Token, nil
 }

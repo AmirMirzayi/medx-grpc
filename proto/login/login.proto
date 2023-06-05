@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "medx/grpc/proto/login";
+
+import "google/api/annotations.proto";
+
+message Auth {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginRequest {
+  Auth auth = 1;
+}
+
+message LoginResponse {
+  string token = 1;
+}
+
+service LoginService {
+  rpc DoLogin(LoginRequest) returns(LoginResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/login"
+      body: "*"
+    };
+  }
+}
